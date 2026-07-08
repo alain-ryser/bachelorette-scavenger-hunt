@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "prototype-cms-2026-07-08",
+  "event": {
+    "title": "Mission Gipfelglück",
+    "subtitle": "Sinas Weg zum Bonistock",
+    "date": "2026-09-19",
+    "timezone": "Europe/Zurich",
+    "startLocation": "Luzern"
+  },
+  "access": {
+    "gameCode": "SINA-2026"
+  },
+  "routes": [
+    {
+      "id": "A",
+      "name": "Regulär",
+      "description": "Mit Luzern, Aeschbach und optionalem See-/Sarnen-Moment.",
+      "stationIds": [
+        "brunch",
+        "luzern",
+        "aeschbach",
+        "see_sarnen",
+        "stoeckalp",
+        "melchsee_frutt",
+        "bonistock"
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Kurz / Schlechtwetter",
+      "description": "Aeschbach als wetterfester Kern, ohne See-Stopp.",
+      "stationIds": [
+        "brunch",
+        "aeschbach",
+        "stoeckalp",
+        "melchsee_frutt",
+        "bonistock"
+      ]
+    }
+  ],
+  "stations": [
+    {
+      "id": "brunch",
+      "chapter": 1,
+      "title": "Willkommen, Sina",
+      "locationLabel": "Luzern / Brunch",
+      "durationMinutes": 10,
+      "type": "story",
+      "prompt": "Gemeinsamer Start und erstes Foto",
+      "successText": "Mission gestartet. Das erste Foto bleibt lokal auf dem Spielhandy.",
+      "travel": {
+        "label": "Nächstes Ziel wird enthüllt",
+        "details": "Kurzer Weg in Luzern. Genauer Ort wird später ergänzt.",
+        "mapUrl": "https://maps.google.com/?q=Luzern"
+      },
+      "fallbackCode": "START-19",
+      "hints": []
+    },
+    {
+      "id": "luzern",
+      "chapter": 2,
+      "title": "Die erste Spur",
+      "locationLabel": "Luzern Outdoor",
+      "durationMinutes": 12,
+      "type": "text",
+      "prompt": "Ort finden und Beobachtungsrätsel lösen",
+      "answer": {
+        "accepted": [
+          "kapellbrücke",
+          "kapellbruecke",
+          "brücke",
+          "bruecke"
+        ],
+        "normalization": "lowercase-trim-umlaut"
+      },
+      "successText": "Spur gefunden. Jetzt wird es süss.",
+      "travel": {
+        "label": "Weiter zu Aeschbach Chocolatier",
+        "details": "Die Führung bleibt handyfrei. Die App meldet sich davor oder danach mit dem Cupcake-Easter-Egg.",
+        "mapUrl": "https://maps.google.com/?q=Aeschbach+Chocolatier"
+      },
+      "fallbackCode": "LUZERN-2",
+      "hints": [
+        "Der gesuchte Ort ist sehr fotogen und sehr luzernerisch.",
+        "Wasser, Holz und ein Klassiker auf fast jeder Postkarte."
+      ]
+    },
+    {
+      "id": "aeschbach",
+      "chapter": 3,
+      "title": "Schoggi & ein süsser Zufall",
+      "locationLabel": "Aeschbach Chocolatier",
+      "durationMinutes": 8,
+      "type": "qr",
+      "prompt": "QR-Requisite oder Ersatzcode nach/vor der Führung",
+      "qrToken": "CUPCAKE",
+      "successText": "Cupcake-Easter-Egg freigeschaltet. Die persönliche Geschichte kann hier später als Audio oder Text erscheinen.",
+      "travel": {
+        "label": "Richtung Sarnen / Stöckalp",
+        "details": "Wenn genügend Zeit bleibt: kurzer See-/Sarnen-Moment. Sonst direkt weiterreisen.",
+        "mapUrl": "https://maps.google.com/?q=Sarnen"
+      },
+      "fallbackCode": "AESCHBACH",
+      "hints": [
+        "Der Code gehört zur Kennenlerngeschichte, nicht zur Führung.",
+        "Falls Kamera oder Licht nicht mitspielen: Ersatzcode AESCHBACH eingeben."
+      ]
+    },
+    {
+      "id": "see_sarnen",
+      "chapter": 4,
+      "title": "Optionaler See-Moment",
+      "locationLabel": "See oder Sarnen",
+      "durationMinutes": 12,
+      "type": "choice",
+      "prompt": "Kurze Gruppenwahl nur bei Wetter und Zeitpuffer",
+      "choices": [
+        {
+          "id": "mut",
+          "label": "Sina sagt Ja zum Abenteuer."
+        },
+        {
+          "id": "ruhe",
+          "label": "Sina findet den schönsten Blick."
+        },
+        {
+          "id": "team",
+          "label": "Sina bringt alle zusammen."
+        }
+      ],
+      "successText": "Optionaler Moment gespeichert. Wenn es knapp wird: keine Reue, weiterreisen.",
+      "travel": {
+        "label": "Weiter Richtung Stöckalp",
+        "details": "Zeitkritischer Abschnitt: bei Verspätung direkt zur nächsten Verbindung.",
+        "mapUrl": "https://maps.google.com/?q=St%C3%B6ckalp"
+      },
+      "deadline": "15:45",
+      "fallbackCode": "SEE-OPT",
+      "hints": [
+        "Dieser Stopp ist Bonus, kein Muss.",
+        "Bei knappem Puffer sofort zur Reiseansicht wechseln."
+      ]
+    },
+    {
+      "id": "stoeckalp",
+      "chapter": 5,
+      "title": "Jetzt wird es bergig",
+      "locationLabel": "Fahrt / Stöckalp",
+      "durationMinutes": 7,
+      "type": "travel",
+      "prompt": "Akku, Offline-Status, Verbindung und Wasser prüfen",
+      "successText": "Bereit für die Gondel.",
+      "travel": {
+        "label": "Gondel nach Melchsee-Frutt",
+        "details": "Definitive Fahrzeiten 2026 später eintragen. Ziel: genug Puffer vor Aufstieg und Abendessen.",
+        "mapUrl": "https://maps.google.com/?q=Melchsee-Frutt"
+      },
+      "deadline": "17:00",
+      "fallbackCode": "STOECKALP",
+      "hints": [
+        "Wenn die Zeit knapp wird, keine Zusatzaufgabe starten.",
+        "Recovery-Code nutzen, falls Verbindung oder Standort zickt."
+      ]
+    },
+    {
+      "id": "melchsee_frutt",
+      "chapter": 6,
+      "title": "Der letzte Blick zurück",
+      "locationLabel": "Melchsee-Frutt",
+      "durationMinutes": 12,
+      "type": "camera",
+      "prompt": "Ruhiges Gruppenfoto vor dem Aufstieg",
+      "successText": "Bonistock freigeschaltet. Ab jetzt: Handy weg, gemeinsam aufsteigen.",
+      "travel": {
+        "label": "Aufstieg zum Bonistock; Handy weg",
+        "details": "Keine Bildschirmaufgabe während des Aufstiegs mit Gepäck.",
+        "mapUrl": "https://maps.google.com/?q=Berghotel+Bonistock"
+      },
+      "deadline": "18:00",
+      "fallbackCode": "FRUTT-6",
+      "hints": [
+        "Das Foto ist lokal und optional.",
+        "Wenn Wetter oder Energie knapp sind, manuell abschliessen und los."
+      ]
+    },
+    {
+      "id": "bonistock",
+      "chapter": 7,
+      "title": "Oben angekommen",
+      "locationLabel": "Berghotel Bonistock",
+      "durationMinutes": 8,
+      "type": "finale",
+      "prompt": "Rückblick, persönliche Nachricht und Toast",
+      "successText": "Mission abgeschlossen. Handy weg. Abend geniessen.",
+      "fallbackCode": "BONI-7",
+      "hints": []
+    }
+  ]
+}

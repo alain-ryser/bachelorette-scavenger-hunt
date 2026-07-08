@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" role="img" aria-label="Mission Gipfelglück">
+  <rect width="192" height="192" rx="44" fill="#214c3a"/>
+  <path d="M32 132 76 64l28 42 18-26 38 52H32Z" fill="#fbf5e8"/>
+  <circle cx="132" cy="54" r="16" fill="#d9796b"/>
+  <path d="M55 133c18 10 63 10 82 0" fill="none" stroke="#d9796b" stroke-width="10" stroke-linecap="round"/>
+</svg>

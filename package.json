@@ -1,0 +1,25 @@
+{
+  "name": "mission-gipfelglueck",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cms:build": "node scripts/build-content-from-cms.mjs cms/prototyp-cms.csv public/content/game-package.json public/content/game-package.json --version prototype-cms-2026-07-08",
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "check": "tsc --noEmit && pnpm run validate:content",
+    "validate:content": "node scripts/validate-content.mjs public/content/game-package.json"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.7.2",
+    "vite": "^8.1.3"
+  }
+}
