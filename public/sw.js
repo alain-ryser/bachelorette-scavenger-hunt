@@ -1,10 +1,11 @@
 const CACHE_NAME = "mission-gipfelglueck-v1";
+const BASE_PATH = new URL(self.registration.scope).pathname;
 const APP_SHELL = [
-  "/",
-  "/manifest.webmanifest",
-  "/content/game-package.json",
-  "/icons/icon-192.svg",
-  "/icons/icon-512.svg"
+  BASE_PATH,
+  `${BASE_PATH}manifest.webmanifest`,
+  `${BASE_PATH}content/game-package.json`,
+  `${BASE_PATH}icons/icon-192.svg`,
+  `${BASE_PATH}icons/icon-512.svg`
 ];
 
 self.addEventListener("install", (event) => {
@@ -30,7 +31,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   if (request.mode === "navigate") {
-    event.respondWith(fetch(request).catch(() => caches.match("/")));
+    event.respondWith(fetch(request).catch(() => caches.match(BASE_PATH)));
     return;
   }
 

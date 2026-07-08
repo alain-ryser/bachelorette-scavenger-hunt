@@ -1,11 +1,11 @@
-import type { GamePackage, Progress } from "../domain/types";
+import type { GamePackage, LocalPhoto, Progress } from "../domain/types";
 
 const DB_NAME = "mission-gipfelglueck";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const PACKAGE_KEY = "latest-package";
 const PROGRESS_KEY = "progress";
 
-type StoreName = "content" | "progress";
+type StoreName = "content" | "progress" | "photos";
 
 interface StoredValue<T> {
   id: string;
@@ -31,6 +31,21 @@ export async function readProgress(): Promise<Progress | null> {
 export async function clearProgress(): Promise<void> {
   const db = await openDatabase();
   await requestToPromise(db.transaction("progress", "readwrite").objectStore("progress").delete(PROGRESS_KEY));
+  db.close();
+}
+
+export async function saveLocalPhoto(photo: LocalPhoto): Promise<void> {
+  await writeValue("photos", photo.id, photo);
+}
+
+export async function readLocalPhotos(photoIds: string[]): Promise<LocalPhoto[]> {
+  const photos = await Promise.all(photoIds.map((photoId) => readValue<LocalPhoto>("photos", photoId)));
+  return photos.filter((photo): photo is LocalPhoto => photo !== null);
+}
+
+export async function clearLocalPhotos(): Promise<void> {
+  const db = await openDatabase();
+  await requestToPromise(db.transaction("photos", "readwrite").objectStore("photos").clear());
   db.close();
 }
 
@@ -72,6 +87,9 @@ function openDatabase(): Promise<IDBDatabase> {
       }
       if (!db.objectStoreNames.contains("progress")) {
         db.createObjectStore("progress", { keyPath: "id" });
+      }
+      if (!db.objectStoreNames.contains("photos")) {
+        db.createObjectStore("photos", { keyPath: "id" });
       }
     };
 

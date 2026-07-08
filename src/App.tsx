@@ -6,13 +6,16 @@ import { fetchGamePackage } from "./domain/content";
 import { completeStation, createInitialProgress, recoverStation } from "./domain/gameEngine";
 import type { GamePackage, Progress, RouteId, RuntimeStatus } from "./domain/types";
 import { registerServiceWorker } from "./pwa/registerServiceWorker";
-import { clearProgress, readPackage, readProgress, savePackage, saveProgress, verifyStorage } from "./storage/db";
+import { clearLocalPhotos, clearProgress, readPackage, readProgress, savePackage, saveProgress, verifyStorage } from "./storage/db";
 
 const initialRuntimeStatus: RuntimeStatus = {
   online: navigator.onLine,
   serviceWorker: "unsupported",
   storage: "unknown",
-  packageCached: false
+  packageCached: false,
+  camera: "unknown",
+  location: "unknown",
+  qrScanner: "unknown"
 };
 
 export default function App() {
@@ -35,6 +38,19 @@ export default function App() {
 
   useEffect(() => {
     registerServiceWorker((serviceWorker) => setRuntimeStatus((status) => ({ ...status, serviceWorker })));
+  }, []);
+
+  useEffect(() => {
+    const cameraSupported = Boolean(navigator.mediaDevices?.getUserMedia);
+    const locationSupported = "geolocation" in navigator;
+    const qrSupported = "BarcodeDetector" in window;
+
+    setRuntimeStatus((status) => ({
+      ...status,
+      camera: cameraSupported ? "supported" : "unsupported",
+      location: locationSupported ? "supported" : "unsupported",
+      qrScanner: qrSupported ? "supported" : "unsupported"
+    }));
   }, []);
 
   useEffect(() => {
@@ -109,9 +125,23 @@ export default function App() {
     await saveProgress(nextProgress);
   }
 
+  async function handlePhotoSaved(photoId: string) {
+    if (!progress) return;
+    if (progress.localPhotoIds.includes(photoId)) return;
+
+    const nextProgress = {
+      ...progress,
+      localPhotoIds: [...progress.localPhotoIds, photoId],
+      updatedAtIso: new Date().toISOString()
+    };
+    setProgress(nextProgress);
+    await saveProgress(nextProgress);
+  }
+
   async function resetPrototype() {
     setProgress(null);
     await clearProgress();
+    await clearLocalPhotos();
   }
 
   if (!gamePackage) {
@@ -132,6 +162,7 @@ export default function App() {
           progress={progress}
           onComplete={handleComplete}
           onRecover={handleRecover}
+          onPhotoSaved={handlePhotoSaved}
           onReset={resetPrototype}
         />
       ) : (

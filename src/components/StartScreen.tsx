@@ -74,8 +74,48 @@ export function StartScreen({
             Mission starten
           </button>
           <button className="ghost-button" onClick={onRefreshPackage} type="button">
-            CMS-Snapshot neu laden
+            Inhaltsversion neu prüfen
           </button>
+        </div>
+      </section>
+
+      <section className="panel compact">
+        <h3>Vorabcheck</h3>
+        <div className="check-grid">
+          <StatusCheck label="Content" value={`Version ${gamePackage.contentVersion}`} ok={runtimeStatus.packageCached} />
+          <StatusCheck
+            label="Speicher"
+            value={runtimeStatus.storage === "ready" ? "IndexedDB bereit" : "Speicher prüfen"}
+            ok={runtimeStatus.storage === "ready"}
+          />
+          <StatusCheck
+            label="PWA"
+            value={runtimeStatus.serviceWorker === "ready" ? "installierbar" : "Service Worker noch nicht bereit"}
+            ok={runtimeStatus.serviceWorker === "ready"}
+          />
+          <StatusCheck
+            label="Netz"
+            value={runtimeStatus.online ? "online" : "offline / lokaler Snapshot"}
+            ok={runtimeStatus.online || runtimeStatus.packageCached}
+          />
+          <StatusCheck
+            label="Kamera"
+            value={runtimeStatus.camera === "supported" ? "verfügbar" : "Fallback-Code möglich"}
+            ok={runtimeStatus.camera === "supported"}
+            optional
+          />
+          <StatusCheck
+            label="Standort"
+            value={runtimeStatus.location === "supported" ? "verfügbar" : "Fallback-Code möglich"}
+            ok={runtimeStatus.location === "supported"}
+            optional
+          />
+          <StatusCheck
+            label="QR"
+            value={runtimeStatus.qrScanner === "supported" ? "Scanner verfügbar" : "manueller Code möglich"}
+            ok={runtimeStatus.qrScanner === "supported"}
+            optional
+          />
         </div>
       </section>
 
@@ -92,5 +132,24 @@ export function StartScreen({
         </p>
       </section>
     </main>
+  );
+}
+
+function StatusCheck({
+  label,
+  value,
+  ok,
+  optional = false
+}: {
+  label: string;
+  value: string;
+  ok: boolean;
+  optional?: boolean;
+}) {
+  return (
+    <div className={ok ? "check-item ok" : optional ? "check-item optional" : "check-item warn"}>
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
   );
 }

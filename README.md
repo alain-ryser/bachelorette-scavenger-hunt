@@ -10,14 +10,19 @@ Installierbarer PWA-Prototyp für Sinas Schnitzeljagd am 19. September 2026.
 - Spielstand und Inhaltssnapshot in IndexedDB.
 - Route A und Route B inkl. Aeschbach Chocolatier als eigene Station.
 - Startseite mit einem Spielcode, Android-Installationshinweis und Route-Auswahl.
-- Stationen mit Story-, Text-, QR-/Fallback-, Multiple-Choice-, Reise-, Kamera- und Finale-Typen.
+- Stationen mit Story-, Text-, QR-/Fallback-, Multiple-Choice-, Reise-, GPS-, Kamera- und Finale-Typen.
 - Hinweise, manuelle Ersatzcodes und Recovery-Modus sind im Prototyp vorhanden.
+- Vorabcheck für Content-Version, Offline-Speicher, PWA, Netzwerk, Kamera, Standort und QR-Scanner.
+- Nativer QR-Scanner für unterstützte Browser; manueller Ersatzcode bleibt sichtbar.
+- GPS-Ankunftsprüfung auf Melchsee-Frutt mit Fallback-Code.
+- Lokale Kamera-Challenge beim Brunch; Fotos bleiben nur in IndexedDB auf dem Gerät.
 - Ein lokaler CMS-Publishing-Prototyp baut `game-package.json` aus einem schlanken CSV-Spiegel des Google-Sheet-Tabs `Prototyp_CMS`.
 
 ## Prototyp-Codes
 
 - Spielcode: `SINA-2026`
 - Aeschbach-Fallback: `AESCHBACH`
+- Melchsee-Frutt-Fallback: `FRUTT-6`
 
 Diese Codes sind nur lokale Prototypwerte und dürfen vor einem echten Deployment ersetzt werden.
 
@@ -35,6 +40,37 @@ pnpm run dev
 `pnpm run cms:build` übernimmt die einfachen CMS-Felder aus [prototyp-cms.csv](/Users/aryser/Documents/SchnitzeljagdSina/cms/prototyp-cms.csv) und behält technische Defaults aus dem bestehenden Content-Paket bei.
 
 In der aktuellen Codex-Umgebung ist Node nicht systemweit im `PATH`; dort wird der gebündelte Node-/pnpm-Pfad verwendet. In einer normalen lokalen Node-Installation reichen die Befehle oben.
+
+## Lokal testen
+
+```bash
+pnpm run dev
+```
+
+Danach `http://127.0.0.1:5173/` öffnen und mit `SINA-2026` starten.
+
+## Smartphone-Test via GitHub Pages
+
+Der Deployment-Workflow baut die App für GitHub Pages unter `/mission-gipfelglueck/`.
+
+Nach erfolgreichem GitHub-Actions-Deployment:
+
+1. GitHub-Pages-URL auf dem Android-Testgerät in Chrome öffnen.
+2. Spielcode `SINA-2026` eingeben.
+3. Route B einmal komplett durchspielen.
+4. Chrome-Menü öffnen und „Zum Startbildschirm hinzufügen“ testen.
+5. App nach einmaligem Laden im Offline-Modus erneut öffnen.
+
+## V1-Testfälle
+
+- Spielcode korrekt/falsch.
+- Hinweise bleiben pro Station isoliert.
+- Nächster Ort bleibt bis zur Lösung verborgen.
+- QR-Scan bei Aeschbach plus Ersatzcode `AESCHBACH`.
+- GPS auf Melchsee-Frutt plus Ersatzcode `FRUTT-6`.
+- Kamera beim Brunch plus „Ohne Foto fortfahren“.
+- Browser schliessen und Spielstand fortsetzen.
+- Prototyp zurücksetzen löscht Spielstand und lokale Testfotos.
 
 ## Architektur
 

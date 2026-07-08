@@ -1,8 +1,10 @@
 export type RouteId = "A" | "B";
 
-export type StationType = "story" | "text" | "qr" | "choice" | "travel" | "camera" | "finale";
+export type StationType = "story" | "text" | "qr" | "choice" | "travel" | "gps" | "camera" | "finale";
 
 export type StationState = "locked" | "available" | "active" | "completed" | "recovered";
+
+export type CapabilityStatus = "unknown" | "supported" | "unsupported";
 
 export interface GamePackage {
   schemaVersion: number;
@@ -51,6 +53,12 @@ export interface Station {
     details: string;
     mapUrl?: string;
   };
+  geo?: {
+    latitude: number;
+    longitude: number;
+    radiusMeters: number;
+    label: string;
+  };
   deadline?: string;
   fallbackCode: string;
   hints: string[];
@@ -67,9 +75,19 @@ export interface Progress {
   updatedAtIso: string;
 }
 
+export interface LocalPhoto {
+  id: string;
+  stationId: string;
+  dataUrl: string;
+  createdAtIso: string;
+}
+
 export interface RuntimeStatus {
   online: boolean;
   serviceWorker: "unsupported" | "installing" | "ready";
   storage: "unknown" | "ready" | "failed";
   packageCached: boolean;
+  camera: CapabilityStatus;
+  location: CapabilityStatus;
+  qrScanner: CapabilityStatus;
 }

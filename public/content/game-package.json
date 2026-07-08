@@ -46,7 +46,7 @@
       "title": "Willkommen, Sina",
       "locationLabel": "Luzern / Brunch",
       "durationMinutes": 10,
-      "type": "story",
+      "type": "camera",
       "prompt": "Gemeinsamer Start und erstes Foto",
       "successText": "Mission gestartet. Das erste Foto bleibt lokal auf dem Spielhandy.",
       "travel": {
@@ -169,13 +169,19 @@
       "title": "Der letzte Blick zurück",
       "locationLabel": "Melchsee-Frutt",
       "durationMinutes": 12,
-      "type": "camera",
-      "prompt": "Ruhiges Gruppenfoto vor dem Aufstieg",
+      "type": "gps",
+      "prompt": "Ankunft auf Melchsee-Frutt bestätigen",
       "successText": "Bonistock freigeschaltet. Ab jetzt: Handy weg, gemeinsam aufsteigen.",
       "travel": {
         "label": "Aufstieg zum Bonistock; Handy weg",
         "details": "Keine Bildschirmaufgabe während des Aufstiegs mit Gepäck.",
         "mapUrl": "https://maps.google.com/?q=Berghotel+Bonistock"
+      },
+      "geo": {
+        "latitude": 46.7756,
+        "longitude": 8.2679,
+        "radiusMeters": 700,
+        "label": "Melchsee-Frutt"
       },
       "deadline": "18:00",
       "fallbackCode": "FRUTT-6",

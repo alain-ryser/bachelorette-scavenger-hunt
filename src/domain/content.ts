@@ -1,6 +1,6 @@
 import type { GamePackage } from "./types";
 
-const CONTENT_URL = "/content/game-package.json";
+const CONTENT_URL = `${import.meta.env.BASE_URL}content/game-package.json`;
 
 export async function fetchGamePackage(): Promise<GamePackage> {
   const response = await fetch(CONTENT_URL, { cache: "no-store" });

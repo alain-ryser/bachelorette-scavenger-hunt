@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const knownRouteIds = new Set(["A", "B"]);
-const knownStationTypes = new Set(["story", "text", "qr", "choice", "travel", "camera", "finale"]);
+const knownStationTypes = new Set(["story", "text", "qr", "choice", "travel", "gps", "camera", "finale"]);
 
 const filePath = resolve(process.argv[2] ?? "public/content/game-package.json");
 const errors = [];
@@ -236,6 +236,10 @@ function validateStation(station, fallbackCodes) {
     validateTravel(station, label);
   }
 
+  if (station.geo !== undefined) {
+    validateGeo(station, label);
+  }
+
   if (station.type === "text") {
     validateTextStation(station, label);
   }
@@ -263,6 +267,29 @@ function validateTravel(station, label) {
 
   if (station.travel.mapUrl !== undefined && !validUrl(station.travel.mapUrl)) {
     error(`${label}: travel.mapUrl muss eine gültige URL sein.`);
+  }
+}
+
+function validateGeo(station, label) {
+  if (!isRecord(station.geo)) {
+    error(`${label}: geo muss ein Objekt sein.`);
+    return;
+  }
+
+  if (typeof station.geo.latitude !== "number" || station.geo.latitude < -90 || station.geo.latitude > 90) {
+    error(`${label}: geo.latitude muss zwischen -90 und 90 liegen.`);
+  }
+
+  if (typeof station.geo.longitude !== "number" || station.geo.longitude < -180 || station.geo.longitude > 180) {
+    error(`${label}: geo.longitude muss zwischen -180 und 180 liegen.`);
+  }
+
+  if (!Number.isInteger(station.geo.radiusMeters) || station.geo.radiusMeters < 25 || station.geo.radiusMeters > 5000) {
+    error(`${label}: geo.radiusMeters muss eine ganze Zahl zwischen 25 und 5000 sein.`);
+  }
+
+  if (!nonEmptyString(station.geo.label)) {
+    error(`${label}: geo.label muss gesetzt sein.`);
   }
 }
 

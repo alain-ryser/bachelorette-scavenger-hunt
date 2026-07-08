@@ -3,7 +3,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-const stationTypes = new Set(["story", "text", "qr", "choice", "travel", "camera", "finale"]);
+const stationTypes = new Set(["story", "text", "qr", "choice", "travel", "gps", "camera", "finale"]);
 const requiredHeaders = [
   "station_id",
   "route_a",

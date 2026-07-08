@@ -314,6 +314,42 @@ a {
   padding-left: 1.3rem;
 }
 
+.check-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.check-item {
+  display: grid;
+  gap: 4px;
+  border: 1px solid rgb(33 76 58 / 12%);
+  border-radius: 18px;
+  padding: 13px 14px;
+  background: #fffaf1;
+}
+
+.check-item span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.check-item strong {
+  color: var(--green);
+}
+
+.check-item.warn strong {
+  color: var(--berry);
+}
+
+.check-item.optional strong {
+  color: var(--coral);
+}
+
 .error-text,
 .message {
   border-radius: 16px;
@@ -427,6 +463,36 @@ a {
   margin-top: 22px;
 }
 
+.scanner-box,
+.camera-box,
+.gps-box {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.scanner-video {
+  width: 100%;
+  max-height: 320px;
+  border-radius: 20px;
+  background: var(--green);
+  object-fit: cover;
+}
+
+.photo-preview,
+.photo-grid img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgb(33 76 58 / 14%);
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
 .choice-list {
   display: grid;
   gap: 10px;
@@ -505,6 +571,8 @@ a {
   }
 
   .route-grid,
+  .check-grid,
+  .photo-grid,
   .summary-grid,
   .station-layout {
     grid-template-columns: 1fr;
