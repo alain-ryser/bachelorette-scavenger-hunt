@@ -51,7 +51,7 @@ Danach `http://127.0.0.1:5173/` öffnen und mit `SINA-2026` starten.
 
 ## Smartphone-Test via GitHub Pages
 
-Der Deployment-Workflow baut die App für GitHub Pages unter `/mission-gipfelglueck/`.
+Der Deployment-Workflow baut die App für GitHub Pages unter `/bachelorette-scavenger-hunt/`.
 
 Nach erfolgreichem GitHub-Actions-Deployment:
 

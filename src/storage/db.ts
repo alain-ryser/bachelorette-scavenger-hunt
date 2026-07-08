@@ -1,6 +1,6 @@
 import type { GamePackage, LocalPhoto, Progress } from "../domain/types";
 
-const DB_NAME = "mission-gipfelglueck";
+const DB_NAME = "bachelorette-scavenger-hunt";
 const DB_VERSION = 2;
 const PACKAGE_KEY = "latest-package";
 const PROGRESS_KEY = "progress";
