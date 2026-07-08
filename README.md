@@ -53,6 +53,8 @@ Danach `http://127.0.0.1:5173/` öffnen und mit `SINA-2026` starten.
 
 Der Deployment-Workflow baut die App für GitHub Pages unter `/bachelorette-scavenger-hunt/`.
 
+Live-Version: https://alain-ryser.github.io/bachelorette-scavenger-hunt/
+
 Nach erfolgreichem GitHub-Actions-Deployment:
 
 1. GitHub-Pages-URL auf dem Android-Testgerät in Chrome öffnen.
@@ -89,4 +91,3 @@ Nach erfolgreichem GitHub-Actions-Deployment:
 - Geheimer URL-Fragment-Key und produktive Zugriffskontrolle.
 - Medien-Download/Prüfung aus Drive.
 - Vollständiger Offline-Feldtest auf Haupt- und Ersatzgerät.
-- Finaler Deployment-Workflow für GitHub Pages.
