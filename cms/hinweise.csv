@@ -1,0 +1,13 @@
+station_id,stufe,hinweis_text,gueltige_antworten,qr_token,fallback_aktiv
+luzern,1,[Erster hilfreicher Hinweis],[Antworten mit | trennen],,JA
+luzern,2,[Deutlicher Hinweis ohne Überraschung zu zerstören],[Antworten mit | trennen],,JA
+luzern_indoor,1,[Erster hilfreicher Hinweis],[Antworten mit | trennen],,JA
+luzern_indoor,2,[Deutlicher Hinweis ohne Überraschung zu zerstören],[Antworten mit | trennen],,JA
+aeschbach,1,"Schaut dort, wo aus Kakao ein Programmpunkt wird.",[Antworten mit | trennen],CUPCAKE,JA
+aeschbach,2,"Der QR-/Fallback-Code gehört zur süssen Geschichte, nicht zur Führung selbst.",[Antworten mit | trennen],,JA
+see_sarnen,1,"Nur spielen, wenn genug Zeit bis zur Weiterfahrt bleibt.",[Antworten mit | trennen],,JA
+see_sarnen,2,"Wenn der Puffer knapp ist: Aufgabe überspringen und direkt reisen.",[Antworten mit | trennen],,JA
+stoeckalp,1,[Erster hilfreicher Hinweis],[Antworten mit | trennen],,JA
+stoeckalp,2,[Deutlicher Hinweis ohne Überraschung zu zerstören],[Antworten mit | trennen],,JA
+melchsee_frutt,1,[Erster hilfreicher Hinweis],[Antworten mit | trennen],,JA
+melchsee_frutt,2,[Deutlicher Hinweis ohne Überraschung zu zerstören],[Antworten mit | trennen],,JA

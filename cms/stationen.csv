@@ -1,0 +1,9 @@
+station_id,kapitel,ort_phase,dauer_min,unlock_type,titel,aufgabe_kurz,aufloesung,reisehinweis,deadline,fallback_code,status
+brunch,1,Luzern / Brunch,10,STORY,"Willkommen, Sina","Gemeinsamer Start und erstes Foto","Kapitel 1 abgeschlossen","Nächstes Ziel wird enthüllt",,START-19,Entwurf
+luzern,2,Luzern Outdoor,12,GPS_TEXT,"Die erste Spur","Ort finden und Beobachtungsrätsel lösen",[Auflösung ergänzen],"Weiter zum Cupcake-Hinweis",,LUZERN-2,Entwurf
+luzern_indoor,2,Reserve indoor / Luzern,10,IMAGE_TEXT,"Reserve, falls Aeschbach entfällt","Bild-/Logikrätsel unter Dach",[Auflösung ergänzen],"Nur nutzen, wenn die Führung nicht stattfindet",,INDOOR-2,Entwurf
+aeschbach,3,Aeschbach Chocolatier / Luzern,8,QR,"Schoggi & ein süsser Zufall","QR-Requisite öffnet Cupcake-/Kennenlerngeschichte vor oder nach der Führung",[Persönlichen Text ergänzen],"Danach Richtung Sarnen/Stöckalp; See-Halt nur bei Zeitpuffer",,AESCHBACH,Entwurf
+see_sarnen,4,See oder Sarnen (optional),12,AUDIO_SEQUENCE,"Optionaler See-Moment","Kurze Gruppenaufgabe nur bei Wetter und Zeitpuffer",[Auflösung ergänzen],"Bei knappem Zeitplan direkt weiter nach Sarnen/Stöckalp",,SEE-OPT,Entwurf
+stoeckalp,5,Fahrt / Stöckalp,7,TRAVEL,"Jetzt wird es bergig","Kurzer Reise- und Offline-Check","Bereit für die Gondel","Gondel nach Melchsee-Frutt",17:00,STOECKALP,Entwurf
+melchsee_frutt,6,Melchsee-Frutt,12,GPS_CAMERA,"Der letzte Blick zurück","Landschafts-/Kameraaufgabe vor dem Aufstieg","Bonistock wird enthüllt","Handy verstauen und gemeinsam aufsteigen",18:00,FRUTT-6,Entwurf
+bonistock,7,Berghotel Bonistock,8,FINALE,"Oben angekommen","Rückblick, Nachricht und Toast","Mission abgeschlossen","Kein weiterer Programmpunkt",,BONI-7,Entwurf

@@ -5,6 +5,8 @@ import { resolve } from "node:path";
 
 const knownRouteIds = new Set(["A", "B"]);
 const knownStationTypes = new Set(["story", "text", "qr", "choice", "travel", "gps", "camera", "finale"]);
+const knownMediaTypes = new Set(["image", "audio", "video", "text"]);
+const knownOfflinePriorities = new Set(["high", "medium", "low"]);
 
 const filePath = resolve(process.argv[2] ?? "public/content/game-package.json");
 const errors = [];
@@ -122,6 +124,10 @@ function validatePackage(value) {
 
   for (const station of value.stations) {
     validateStation(station, fallbackCodes);
+  }
+
+  if (value.media !== undefined) {
+    validateMediaManifest(value.media, stationIdSet);
   }
 
   if (!uniqueValues(fallbackCodes)) {
@@ -294,8 +300,13 @@ function validateGeo(station, label) {
 }
 
 function validateTextStation(station, label) {
+  if (station.answer === undefined) {
+    warn(`${label}: Text-Station hat keine akzeptierten Antworten und ist nur per Fallback lösbar.`);
+    return;
+  }
+
   if (!isRecord(station.answer)) {
-    error(`${label}: Text-Station braucht answer.`);
+    error(`${label}: answer muss ein Objekt sein.`);
     return;
   }
 
@@ -307,6 +318,61 @@ function validateTextStation(station, label) {
 
   if (station.answer.normalization !== "lowercase-trim-umlaut") {
     error(`${label}: answer.normalization muss lowercase-trim-umlaut sein.`);
+  }
+}
+
+function validateMediaManifest(mediaItems, stationIdSet) {
+  if (!Array.isArray(mediaItems)) {
+    error("media muss eine Liste sein.");
+    return;
+  }
+
+  const mediaIds = [];
+  for (const mediaItem of mediaItems) {
+    if (!isRecord(mediaItem)) {
+      error("Jedes Medium muss ein Objekt sein.");
+      continue;
+    }
+
+    const label = nonEmptyString(mediaItem.id) ? `Medium ${mediaItem.id}` : "Medium ohne ID";
+
+    if (!nonEmptyString(mediaItem.id)) {
+      error(`${label}: id muss gesetzt sein.`);
+    } else {
+      mediaIds.push(mediaItem.id);
+    }
+
+    if (mediaItem.stationId !== undefined && nonEmptyString(mediaItem.stationId) && !stationIdSet.has(mediaItem.stationId)) {
+      error(`${label}: stationId '${mediaItem.stationId}' existiert nicht.`);
+    }
+
+    if (!knownMediaTypes.has(mediaItem.type)) {
+      error(`${label}: type '${mediaItem.type}' ist unbekannt.`);
+    }
+
+    if (mediaItem.driveUrl !== undefined && nonEmptyString(mediaItem.driveUrl) && !validUrl(mediaItem.driveUrl)) {
+      error(`${label}: driveUrl muss eine gültige URL sein.`);
+    }
+
+    if (!nonEmptyString(mediaItem.altText)) {
+      error(`${label}: altText muss gesetzt sein.`);
+    }
+
+    if (!knownOfflinePriorities.has(mediaItem.offlinePriority)) {
+      error(`${label}: offlinePriority muss high, medium oder low sein.`);
+    }
+
+    if (typeof mediaItem.approved !== "boolean") {
+      error(`${label}: approved muss boolean sein.`);
+    }
+
+    if (!nonEmptyString(mediaItem.status)) {
+      error(`${label}: status muss gesetzt sein.`);
+    }
+  }
+
+  if (!uniqueValues(mediaIds)) {
+    error("Media-IDs müssen eindeutig sein.");
   }
 }
 

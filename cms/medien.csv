@@ -1,0 +1,7 @@
+media_id,station_id,typ,drive_url,alt_text,offline_prioritaet,freigegeben,status
+brunch_intro,brunch,BILD,,[Beschreibung ergänzen],HOCH,NEIN,Entwurf
+cupcake_story,aeschbach,AUDIO,,Persönliche Cupcake-/Kennenlerngeschichte bei Aeschbach,HOCH,NEIN,Entwurf
+sarnen_audio,see_sarnen,AUDIO,,Optionaler See-/Sarnen-Hinweis,NIEDRIG,NEIN,Entwurf
+frutt_overlay,melchsee_frutt,BILD,,[Beschreibung ergänzen],MITTEL,NEIN,Entwurf
+final_message,bonistock,AUDIO,,[Beschreibung ergänzen],HOCH,NEIN,Entwurf
+reserve_1,,BILD,,[Optional],NIEDRIG,NEIN,Entwurf

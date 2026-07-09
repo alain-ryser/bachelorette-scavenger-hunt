@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "cms:build": "node scripts/build-content-from-cms.mjs cms/prototyp-cms.csv public/content/game-package.json public/content/game-package.json --version prototype-cms-2026-07-08",
+    "cms:build": "node scripts/build-content-from-cms.mjs --version sheet-cms-2026-07-09",
     "dev": "vite --host 127.0.0.1",
     "build": "tsc && vite build",
     "preview": "vite preview --host 127.0.0.1",

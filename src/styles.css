@@ -465,10 +465,27 @@ a {
 
 .scanner-box,
 .camera-box,
-.gps-box {
+.gps-box,
+.media-box {
   display: grid;
   gap: 10px;
   margin: 18px 0;
+}
+
+.media-box {
+  max-width: 680px;
+  border-radius: 22px;
+  padding: 18px;
+  background: var(--green-soft);
+}
+
+.media-item {
+  display: grid;
+  gap: 4px;
+}
+
+.media-item small {
+  color: var(--muted);
 }
 
 .scanner-video {

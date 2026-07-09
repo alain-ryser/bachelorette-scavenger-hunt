@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "prototype-cms-2026-07-08",
+  "contentVersion": "sheet-cms-2026-07-09",
   "event": {
-    "title": "Mission Gipfelglück",
+    "title": "Sina's Polteri",
     "subtitle": "Sinas Weg zum Bonistock",
     "date": "2026-09-19",
     "timezone": "Europe/Zurich",
@@ -28,7 +28,7 @@
     },
     {
       "id": "B",
-      "name": "Kurz / Schlechtwetter",
+      "name": "Kurz/Schlechtwetter",
       "description": "Aeschbach als wetterfester Kern, ohne See-Stopp.",
       "stationIds": [
         "brunch",
@@ -48,7 +48,7 @@
       "durationMinutes": 10,
       "type": "camera",
       "prompt": "Gemeinsamer Start und erstes Foto",
-      "successText": "Mission gestartet. Das erste Foto bleibt lokal auf dem Spielhandy.",
+      "successText": "Kapitel 1 abgeschlossen",
       "travel": {
         "label": "Nächstes Ziel wird enthüllt",
         "details": "Kurzer Weg in Luzern. Genauer Ort wird später ergänzt.",
@@ -76,45 +76,58 @@
       },
       "successText": "Spur gefunden. Jetzt wird es süss.",
       "travel": {
-        "label": "Weiter zu Aeschbach Chocolatier",
+        "label": "Weiter zum Cupcake-Hinweis",
         "details": "Die Führung bleibt handyfrei. Die App meldet sich davor oder danach mit dem Cupcake-Easter-Egg.",
         "mapUrl": "https://maps.google.com/?q=Aeschbach+Chocolatier"
       },
       "fallbackCode": "LUZERN-2",
-      "hints": [
-        "Der gesuchte Ort ist sehr fotogen und sehr luzernerisch.",
-        "Wasser, Holz und ein Klassiker auf fast jeder Postkarte."
-      ]
+      "hints": []
+    },
+    {
+      "id": "luzern_indoor",
+      "chapter": 2,
+      "title": "Reserve, falls Aeschbach entfällt",
+      "locationLabel": "Reserve indoor / Luzern",
+      "durationMinutes": 10,
+      "type": "text",
+      "prompt": "Bild-/Logikrätsel unter Dach",
+      "successText": "Kapitel abgeschlossen.",
+      "travel": {
+        "label": "Nur nutzen, wenn die Führung nicht stattfindet",
+        "details": "Details später ergänzen."
+      },
+      "fallbackCode": "INDOOR-2",
+      "hints": []
     },
     {
       "id": "aeschbach",
       "chapter": 3,
       "title": "Schoggi & ein süsser Zufall",
-      "locationLabel": "Aeschbach Chocolatier",
+      "locationLabel": "Aeschbach Chocolatier / Luzern",
       "durationMinutes": 8,
       "type": "qr",
-      "prompt": "QR-Requisite oder Ersatzcode nach/vor der Führung",
+      "prompt": "QR-Requisite öffnet Cupcake-/Kennenlerngeschichte vor oder nach der Führung",
       "qrToken": "CUPCAKE",
       "successText": "Cupcake-Easter-Egg freigeschaltet. Die persönliche Geschichte kann hier später als Audio oder Text erscheinen.",
       "travel": {
-        "label": "Richtung Sarnen / Stöckalp",
+        "label": "Danach Richtung Sarnen/Stöckalp; See-Halt nur bei Zeitpuffer",
         "details": "Wenn genügend Zeit bleibt: kurzer See-/Sarnen-Moment. Sonst direkt weiterreisen.",
         "mapUrl": "https://maps.google.com/?q=Sarnen"
       },
       "fallbackCode": "AESCHBACH",
       "hints": [
-        "Der Code gehört zur Kennenlerngeschichte, nicht zur Führung.",
-        "Falls Kamera oder Licht nicht mitspielen: Ersatzcode AESCHBACH eingeben."
+        "Schaut dort, wo aus Kakao ein Programmpunkt wird.",
+        "Der QR-/Fallback-Code gehört zur süssen Geschichte, nicht zur Führung selbst."
       ]
     },
     {
       "id": "see_sarnen",
       "chapter": 4,
       "title": "Optionaler See-Moment",
-      "locationLabel": "See oder Sarnen",
+      "locationLabel": "See oder Sarnen (optional)",
       "durationMinutes": 12,
       "type": "choice",
-      "prompt": "Kurze Gruppenwahl nur bei Wetter und Zeitpuffer",
+      "prompt": "Kurze Gruppenaufgabe nur bei Wetter und Zeitpuffer",
       "choices": [
         {
           "id": "mut",
@@ -131,15 +144,14 @@
       ],
       "successText": "Optionaler Moment gespeichert. Wenn es knapp wird: keine Reue, weiterreisen.",
       "travel": {
-        "label": "Weiter Richtung Stöckalp",
+        "label": "Bei knappem Zeitplan direkt weiter nach Sarnen/Stöckalp",
         "details": "Zeitkritischer Abschnitt: bei Verspätung direkt zur nächsten Verbindung.",
         "mapUrl": "https://maps.google.com/?q=St%C3%B6ckalp"
       },
-      "deadline": "15:45",
       "fallbackCode": "SEE-OPT",
       "hints": [
-        "Dieser Stopp ist Bonus, kein Muss.",
-        "Bei knappem Puffer sofort zur Reiseansicht wechseln."
+        "Nur spielen, wenn genug Zeit bis zur Weiterfahrt bleibt.",
+        "Wenn der Puffer knapp ist: Aufgabe überspringen und direkt reisen."
       ]
     },
     {
@@ -149,8 +161,8 @@
       "locationLabel": "Fahrt / Stöckalp",
       "durationMinutes": 7,
       "type": "travel",
-      "prompt": "Akku, Offline-Status, Verbindung und Wasser prüfen",
-      "successText": "Bereit für die Gondel.",
+      "prompt": "Kurzer Reise- und Offline-Check",
+      "successText": "Bereit für die Gondel",
       "travel": {
         "label": "Gondel nach Melchsee-Frutt",
         "details": "Definitive Fahrzeiten 2026 später eintragen. Ziel: genug Puffer vor Aufstieg und Abendessen.",
@@ -158,10 +170,7 @@
       },
       "deadline": "17:00",
       "fallbackCode": "STOECKALP",
-      "hints": [
-        "Wenn die Zeit knapp wird, keine Zusatzaufgabe starten.",
-        "Recovery-Code nutzen, falls Verbindung oder Standort zickt."
-      ]
+      "hints": []
     },
     {
       "id": "melchsee_frutt",
@@ -170,10 +179,10 @@
       "locationLabel": "Melchsee-Frutt",
       "durationMinutes": 12,
       "type": "gps",
-      "prompt": "Ankunft auf Melchsee-Frutt bestätigen",
-      "successText": "Bonistock freigeschaltet. Ab jetzt: Handy weg, gemeinsam aufsteigen.",
+      "prompt": "Landschafts-/Kameraaufgabe vor dem Aufstieg",
+      "successText": "Bonistock wird enthüllt",
       "travel": {
-        "label": "Aufstieg zum Bonistock; Handy weg",
+        "label": "Handy verstauen und gemeinsam aufsteigen",
         "details": "Keine Bildschirmaufgabe während des Aufstiegs mit Gepäck.",
         "mapUrl": "https://maps.google.com/?q=Berghotel+Bonistock"
       },
@@ -185,10 +194,7 @@
       },
       "deadline": "18:00",
       "fallbackCode": "FRUTT-6",
-      "hints": [
-        "Das Foto ist lokal und optional.",
-        "Wenn Wetter oder Energie knapp sind, manuell abschliessen und los."
-      ]
+      "hints": []
     },
     {
       "id": "bonistock",
@@ -197,10 +203,69 @@
       "locationLabel": "Berghotel Bonistock",
       "durationMinutes": 8,
       "type": "finale",
-      "prompt": "Rückblick, persönliche Nachricht und Toast",
-      "successText": "Mission abgeschlossen. Handy weg. Abend geniessen.",
+      "prompt": "Rückblick, Nachricht und Toast",
+      "successText": "Mission abgeschlossen",
       "fallbackCode": "BONI-7",
-      "hints": []
+      "hints": [],
+      "travel": {
+        "label": "Kein weiterer Programmpunkt",
+        "details": "Details später ergänzen."
+      }
+    }
+  ],
+  "media": [
+    {
+      "id": "brunch_intro",
+      "stationId": "brunch",
+      "type": "image",
+      "altText": "[Beschreibung ergänzen]",
+      "offlinePriority": "high",
+      "approved": false,
+      "status": "Entwurf"
+    },
+    {
+      "id": "cupcake_story",
+      "stationId": "aeschbach",
+      "type": "audio",
+      "altText": "Persönliche Cupcake-/Kennenlerngeschichte bei Aeschbach",
+      "offlinePriority": "high",
+      "approved": false,
+      "status": "Entwurf"
+    },
+    {
+      "id": "sarnen_audio",
+      "stationId": "see_sarnen",
+      "type": "audio",
+      "altText": "Optionaler See-/Sarnen-Hinweis",
+      "offlinePriority": "low",
+      "approved": false,
+      "status": "Entwurf"
+    },
+    {
+      "id": "frutt_overlay",
+      "stationId": "melchsee_frutt",
+      "type": "image",
+      "altText": "[Beschreibung ergänzen]",
+      "offlinePriority": "medium",
+      "approved": false,
+      "status": "Entwurf"
+    },
+    {
+      "id": "final_message",
+      "stationId": "bonistock",
+      "type": "audio",
+      "altText": "[Beschreibung ergänzen]",
+      "offlinePriority": "high",
+      "approved": false,
+      "status": "Entwurf"
+    },
+    {
+      "id": "reserve_1",
+      "type": "image",
+      "altText": "[Optional]",
+      "offlinePriority": "low",
+      "approved": false,
+      "status": "Entwurf"
     }
   ]
 }

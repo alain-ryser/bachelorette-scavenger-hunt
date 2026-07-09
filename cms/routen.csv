@@ -1,0 +1,15 @@
+route_id,route_name,reihenfolge,station_id,aktiviert,kommentar
+A,Regulär,1,brunch,JA,Start in Luzern
+A,Regulär,2,luzern,JA,Outdoor-Station vor Aeschbach
+A,Regulär,3,aeschbach,JA,Aeschbach + persönliches Easter Egg
+A,Regulär,4,see_sarnen,JA,Optional; nur bei Zeitpuffer
+A,Regulär,5,stoeckalp,JA,Reise-Checkpoint
+A,Regulär,6,melchsee_frutt,JA,Letzte aktive Aufgabe
+A,Regulär,7,bonistock,JA,Ruhiges Finale
+B,Kurz/Schlechtwetter,1,brunch,JA,Start in Luzern
+B,Kurz/Schlechtwetter,2,aeschbach,JA,Aeschbach als wetterfeste Station
+B,Kurz/Schlechtwetter,3,stoeckalp,JA,Direktere Anreise
+B,Kurz/Schlechtwetter,4,melchsee_frutt,JA,Kurze Frutt-Aufgabe
+B,Kurz/Schlechtwetter,5,bonistock,JA,Ruhiges Finale
+B,Kurz/Schlechtwetter,6,see_sarnen,NEIN,Nur bei spontanem Puffer
+B,Kurz/Schlechtwetter,7,luzern_indoor,NEIN,"Reserve, falls Aeschbach entfällt"

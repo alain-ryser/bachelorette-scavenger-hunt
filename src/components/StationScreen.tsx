@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getRouteStations, getStation, isAcceptedAnswer, isRouteCompleted } from "../domain/gameEngine";
-import type { GamePackage, LocalPhoto, Progress, Station } from "../domain/types";
+import type { GamePackage, LocalPhoto, MediaItem, Progress, Station } from "../domain/types";
 import { readLocalPhotos, saveLocalPhoto } from "../storage/db";
 import { ProgressRail } from "./ProgressRail";
 
@@ -35,6 +35,7 @@ export function StationScreen({
         <StationCard
           key={station.id}
           station={station}
+          mediaItems={gamePackage.media?.filter((mediaItem) => mediaItem.stationId === station.id && mediaItem.approved) ?? []}
           routeChapter={currentRouteIndex + 1}
           onComplete={onComplete}
           onRecover={onRecover}
@@ -47,6 +48,7 @@ export function StationScreen({
 
 interface StationCardProps {
   station: Station;
+  mediaItems: MediaItem[];
   routeChapter: number;
   onComplete: (stationId: string) => void;
   onRecover: (stationId: string) => void;
@@ -55,6 +57,7 @@ interface StationCardProps {
 
 function StationCard({
   station,
+  mediaItems,
   routeChapter,
   onComplete,
   onRecover,
@@ -147,6 +150,8 @@ function StationCard({
           <>
             <p>{station.prompt}</p>
 
+            {mediaItems.length > 0 ? <StationMedia mediaItems={mediaItems} /> : null}
+
             <Interaction
               station={station}
               answer={answer}
@@ -213,6 +218,40 @@ function StationCard({
       ) : null}
     </section>
   );
+}
+
+function StationMedia({ mediaItems }: { mediaItems: MediaItem[] }) {
+  return (
+    <div className="media-box">
+      <p className="eyebrow">CMS-Medien</p>
+      {mediaItems.map((mediaItem) => (
+        <div key={mediaItem.id} className="media-item">
+          <strong>{formatMediaType(mediaItem.type)}</strong>
+          <span>{mediaItem.altText}</span>
+          {mediaItem.driveUrl ? (
+            <a href={mediaItem.driveUrl} target="_blank" rel="noreferrer">
+              Medium öffnen
+            </a>
+          ) : (
+            <small>Noch keine Drive-Datei hinterlegt.</small>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function formatMediaType(type: MediaItem["type"]): string {
+  switch (type) {
+    case "audio":
+      return "Audio";
+    case "image":
+      return "Bild";
+    case "video":
+      return "Video";
+    case "text":
+      return "Text";
+  }
 }
 
 interface InteractionProps {

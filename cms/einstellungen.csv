@@ -1,0 +1,15 @@
+Schlüssel,Wert,Erklärung,Status
+spiel_titel,Sina's Polteri,Titel in der App,Freigegeben
+untertitel,Sinas Weg zum Bonistock,Untertitel auf dem Startbildschirm,Freigegeben
+event_datum,2026-09-19,Anlassdatum,Freigegeben
+zeitzone,Europe/Zurich,Für Deadlines und Versionen,Freigegeben
+aktive_route,A,"A = regulär, B = kurz/schlecht",Zu prüfen
+start_zeit,09:30,Vorläufiger Spielstart,Entwurf
+frutt_spaeteste_ankunft,17:00,Nach Fahrplan/Hotel zu bestätigen,Entwurf
+organizer_code,[vor Veröffentlichung setzen],Nur für Recovery-Modus,Entwurf
+spielcode_hinweis,QR-Link oder geheimer Code,Keine sensiblen Inhalte verwenden,Entwurf
+finale_titel,Oben angekommen,Titel des ruhigen Abschlusses,Entwurf
+finale_text,[Persönliche Nachricht und Toast ergänzen],Wird am Bonistock angezeigt,Entwurf
+offene_stationstexte,8,Formel: nicht freigegebene Stationen,System
+offene_medien,6,Formel: nicht freigegebene Medien,System
+letzte_redaktionelle_pruefung,[Datum ergänzen],Vor finaler Veröffentlichung,Entwurf

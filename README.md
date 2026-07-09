@@ -16,7 +16,7 @@ Installierbarer PWA-Prototyp für Sinas Schnitzeljagd am 19. September 2026.
 - Nativer QR-Scanner für unterstützte Browser; manueller Ersatzcode bleibt sichtbar.
 - GPS-Ankunftsprüfung auf Melchsee-Frutt mit Fallback-Code.
 - Lokale Kamera-Challenge beim Brunch; Fotos bleiben nur in IndexedDB auf dem Gerät.
-- Ein lokaler CMS-Publishing-Prototyp baut `game-package.json` aus einem schlanken CSV-Spiegel des Google-Sheet-Tabs `Prototyp_CMS`.
+- Ein lokaler CMS-Publishing-Prototyp baut `game-package.json` aus CSV-Spiegeln der Google-Sheet-Tabs `Einstellungen`, `Routen`, `Stationen`, `Hinweise` und `Medien`.
 
 ## Prototyp-Codes
 
@@ -37,7 +37,7 @@ pnpm run dev
 ```
 
 `pnpm run check` prüft TypeScript und validiert den aktuellen Content-Snapshot.
-`pnpm run cms:build` übernimmt die einfachen CMS-Felder aus [prototyp-cms.csv](/Users/aryser/Documents/SchnitzeljagdSina/cms/prototyp-cms.csv) und behält technische Defaults aus dem bestehenden Content-Paket bei.
+`pnpm run cms:build` übernimmt die lokalen CMS-Spiegel aus [cms](/Users/aryser/Documents/SchnitzeljagdSina/cms) und behält technische Defaults wie Kartenlinks, GPS-Koordinaten und Choice-Optionen aus dem bestehenden Content-Paket bei.
 
 In der aktuellen Codex-Umgebung ist Node nicht systemweit im `PATH`; dort wird der gebündelte Node-/pnpm-Pfad verwendet. In einer normalen lokalen Node-Installation reichen die Befehle oben.
 
@@ -81,13 +81,13 @@ Nach erfolgreichem GitHub-Actions-Deployment:
 - `src/pwa/`: Service-Worker-Registrierung.
 - `src/components/`: UI-Bausteine für Start, Fortschritt und Stationen.
 - `public/content/game-package.json`: statischer CMS-Snapshot für den ersten vertikalen Prototyp.
-- `cms/prototyp-cms.csv`: lokaler Spiegel des einfachen Google-Sheet-Tabs `Prototyp_CMS`.
+- `cms/*.csv`: lokale Spiegel der Google-Sheet-Tabs für Einstellungen, Routen, Stationen, Hinweise und Medien.
 - `scripts/build-content-from-cms.mjs`: baut aus CMS-CSV und technischen Defaults ein App-Content-Paket.
 - `scripts/validate-content.mjs`: schlanke Prüfung des Content-Snapshots gegen die Spielregeln.
 
 ## Noch nicht umgesetzt
 
-- Google-Sheet-Publishing via Apps Script; aktuell gibt es einen lokalen CSV-Builder als Prototyp.
+- Google-Sheet-Publishing via Apps Script; aktuell gibt es einen lokalen Mehr-CSV-Builder als Prototyp.
 - Geheimer URL-Fragment-Key und produktive Zugriffskontrolle.
 - Medien-Download/Prüfung aus Drive.
 - Vollständiger Offline-Feldtest auf Haupt- und Ersatzgerät.

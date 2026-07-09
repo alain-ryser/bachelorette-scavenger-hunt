@@ -1,8 +1,0 @@
-station_id,route_a,route_b,titel,ort_phase,typ,dauer_min,aufgabe,reisehinweis,fallback_code,status
-brunch,JA,JA,"Willkommen, Sina","Luzern / Brunch",camera,10,"Gemeinsamer Start und erstes Foto","Nächstes Ziel wird enthüllt",START-19,"im Prototyp"
-luzern,JA,NEIN,"Die erste Spur","Luzern Outdoor",text,12,"Ort finden und Beobachtungsrätsel lösen","Weiter zu Aeschbach Chocolatier",LUZERN-2,"im Prototyp"
-aeschbach,JA,JA,"Schoggi & ein süsser Zufall","Aeschbach Chocolatier",qr,8,"QR-Requisite oder Ersatzcode nach/vor der Führung","Richtung Sarnen / Stöckalp",AESCHBACH,"im Prototyp"
-see_sarnen,JA,NEIN,"Optionaler See-Moment","See oder Sarnen",choice,12,"Kurze Gruppenwahl nur bei Wetter und Zeitpuffer","Weiter Richtung Stöckalp",SEE-OPT,optional
-stoeckalp,JA,JA,"Jetzt wird es bergig","Fahrt / Stöckalp",travel,7,"Akku, Offline-Status, Verbindung und Wasser prüfen","Gondel nach Melchsee-Frutt",STOECKALP,"im Prototyp"
-melchsee_frutt,JA,JA,"Der letzte Blick zurück","Melchsee-Frutt",gps,12,"Ankunft auf Melchsee-Frutt bestätigen","Aufstieg zum Bonistock; Handy weg",FRUTT-6,"im Prototyp"
-bonistock,JA,JA,"Oben angekommen","Berghotel Bonistock",finale,8,"Rückblick, persönliche Nachricht und Toast","Kein weiterer Programmpunkt",BONI-7,"im Prototyp"

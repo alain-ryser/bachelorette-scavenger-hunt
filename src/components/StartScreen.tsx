@@ -26,7 +26,7 @@ export function StartScreen({
   return (
     <main className="screen start-screen">
       <section className="hero-card">
-        <p className="eyebrow">Samstag · 19. September 2026</p>
+        <p className="eyebrow">{formatEventDate(gamePackage.event.date)}</p>
         <h2>{gamePackage.event.title}</h2>
         <p>
           Ein zentraler Gruppenmodus für Sina: kurze digitale Impulse, klare Reisephasen und genug Raum für
@@ -152,4 +152,15 @@ function StatusCheck({
       <strong>{value}</strong>
     </div>
   );
+}
+
+function formatEventDate(date: string): string {
+  const parsed = new Date(`${date}T12:00:00`);
+  if (Number.isNaN(parsed.getTime())) return date;
+  return parsed.toLocaleDateString("de-CH", {
+    weekday: "long",
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
 }

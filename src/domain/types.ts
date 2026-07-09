@@ -21,6 +21,7 @@ export interface GamePackage {
   };
   routes: GameRoute[];
   stations: Station[];
+  media?: MediaItem[];
 }
 
 export interface GameRoute {
@@ -62,6 +63,17 @@ export interface Station {
   deadline?: string;
   fallbackCode: string;
   hints: string[];
+}
+
+export interface MediaItem {
+  id: string;
+  stationId?: string;
+  type: "image" | "audio" | "video" | "text";
+  driveUrl?: string;
+  altText: string;
+  offlinePriority: "high" | "medium" | "low";
+  approved: boolean;
+  status: string;
 }
 
 export interface Progress {
