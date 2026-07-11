@@ -8,6 +8,7 @@ Installierbarer PWA-Prototyp für Sinas Schnitzeljagd am 19. September 2026.
 - Lokales Inhaltspaket unter `public/content/game-package.json`.
 - Offline-tolerante App-Shell über Service Worker.
 - Spielstand und Inhaltssnapshot in IndexedDB.
+- Optionaler Remote-CMS-Snapshot via Google Apps Script mit lokalem Fallback.
 - Route A und Route B inkl. Aeschbach Chocolatier als eigene Station.
 - Startseite mit einem Spielcode, Android-Installationshinweis und Route-Auswahl.
 - Stationen mit Story-, Text-, QR-/Fallback-, Multiple-Choice-, Reise-, GPS-, Kamera- und Finale-Typen.
@@ -17,6 +18,7 @@ Installierbarer PWA-Prototyp für Sinas Schnitzeljagd am 19. September 2026.
 - GPS-Ankunftsprüfung auf Melchsee-Frutt mit Fallback-Code.
 - Lokale Kamera-Challenge beim Brunch; Fotos bleiben nur in IndexedDB auf dem Gerät.
 - Ein lokaler CMS-Publishing-Prototyp baut `game-package.json` aus CSV-Spiegeln der Google-Sheet-Tabs `Einstellungen`, `Routen`, `Stationen`, `Hinweise` und `Medien`.
+- Ein Apps-Script-Publisher für das Google Sheet liegt unter `apps-script/`.
 
 ## Prototyp-Codes
 
@@ -48,6 +50,19 @@ pnpm run dev
 ```
 
 Danach `http://127.0.0.1:5173/` öffnen und mit `SINA-2026` starten.
+
+Lokale CMS-Änderungen testen:
+
+1. CSV in `cms/` ändern, z. B. `cms/einstellungen.csv`.
+2. `pnpm run cms:build`
+3. Browser hart neu laden oder in der App `Inhaltsversion neu prüfen` klicken.
+
+Remote-CMS lokal testen:
+
+1. `.env.example` nach `.env.local` kopieren.
+2. `VITE_REMOTE_CMS_URL` auf die Apps-Script-Web-App-URL setzen.
+3. `VITE_REMOTE_CMS_KEY` auf den im Apps Script gesetzten Zugriffsschlüssel setzen.
+4. `pnpm run dev` neu starten.
 
 ## Smartphone-Test via GitHub Pages
 
@@ -84,10 +99,23 @@ Nach erfolgreichem GitHub-Actions-Deployment:
 - `cms/*.csv`: lokale Spiegel der Google-Sheet-Tabs für Einstellungen, Routen, Stationen, Hinweise und Medien.
 - `scripts/build-content-from-cms.mjs`: baut aus CMS-CSV und technischen Defaults ein App-Content-Paket.
 - `scripts/validate-content.mjs`: schlanke Prüfung des Content-Snapshots gegen die Spielregeln.
+- `apps-script/`: Google-Sheet-Publisher mit Menü `Schnitzeljagd`, Validierung und Web-App-JSON-Endpunkt.
+
+## Google-Sheet-Publishing
+
+Leas Bearbeitungsweg:
+
+1. Inhalte im Google Sheet anpassen.
+2. Menü `Schnitzeljagd → Prüfen` ausführen.
+3. Wenn die Prüfung erfolgreich ist: `Schnitzeljagd → Veröffentlichen`.
+4. In der PWA auf `Inhaltsversion neu prüfen` klicken.
+
+Die PWA lädt zuerst den Remote-Snapshot. Wenn dieser nicht erreichbar oder ungültig ist, bleibt der letzte lokal gespeicherte Snapshot aktiv. Falls noch kein Cache existiert, wird der App-Fallback aus `public/content/game-package.json` verwendet.
+
+Das Zugriffskonzept ist link-privat: Der Apps-Script-Endpunkt verlangt einen geheimen Key, ist aber kein Ersatz für echte Zugriffskontrolle bei hochsensiblen Inhalten.
 
 ## Noch nicht umgesetzt
 
-- Google-Sheet-Publishing via Apps Script; aktuell gibt es einen lokalen Mehr-CSV-Builder als Prototyp.
-- Geheimer URL-Fragment-Key und produktive Zugriffskontrolle.
+- Automatisches Deployment des Apps Scripts per `clasp`.
 - Medien-Download/Prüfung aus Drive.
 - Vollständiger Offline-Feldtest auf Haupt- und Ersatzgerät.

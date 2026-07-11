@@ -48,7 +48,7 @@ export function StartScreen({
           <input
             value={gameCode}
             onChange={(event) => onGameCodeChange(event.target.value)}
-            placeholder="z.B. SINA-2026"
+            placeholder="Geheimer Spielcode"
             autoComplete="off"
           />
         </label>
@@ -83,6 +83,18 @@ export function StartScreen({
         <h3>Vorabcheck</h3>
         <div className="check-grid">
           <StatusCheck label="Content" value={`Version ${gamePackage.contentVersion}`} ok={runtimeStatus.packageCached} />
+          <StatusCheck
+            label="Quelle"
+            value={formatContentSource(runtimeStatus)}
+            ok={runtimeStatus.contentSource === "remote" || runtimeStatus.packageCached}
+            optional={runtimeStatus.contentSource !== "remote"}
+          />
+          <StatusCheck
+            label="Letzter Sync"
+            value={formatLastRemoteSync(runtimeStatus.lastRemoteSyncIso)}
+            ok={Boolean(runtimeStatus.lastRemoteSyncIso)}
+            optional
+          />
           <StatusCheck
             label="Speicher"
             value={runtimeStatus.storage === "ready" ? "IndexedDB bereit" : "Speicher prüfen"}
@@ -128,7 +140,8 @@ export function StartScreen({
         </ol>
         <p className="muted">
           Aktuell: Speicher {runtimeStatus.storage}, Service Worker {runtimeStatus.serviceWorker}, Paket{" "}
-          {runtimeStatus.packageCached ? "lokal gespeichert" : "noch nicht lokal bestätigt"}.
+          {runtimeStatus.packageCached ? "lokal gespeichert" : "noch nicht lokal bestätigt"}. Remote-CMS{" "}
+          {runtimeStatus.remoteConfigured ? "konfiguriert" : "nicht konfiguriert"}.
         </p>
       </section>
     </main>
@@ -162,5 +175,25 @@ function formatEventDate(date: string): string {
     day: "2-digit",
     month: "long",
     year: "numeric"
+  });
+}
+
+function formatContentSource(runtimeStatus: RuntimeStatus): string {
+  if (runtimeStatus.contentSource === "remote") return "Remote-Sheet";
+  if (runtimeStatus.contentSource === "cache") return "lokaler Cache";
+  if (runtimeStatus.contentSource === "fallback") return "App-Fallback";
+  return runtimeStatus.remoteConfigured ? "Remote-CMS bereit" : "lokaler Prototyp";
+}
+
+function formatLastRemoteSync(syncIso?: string): string {
+  if (!syncIso) return "noch kein Remote-Sync";
+  const parsed = new Date(syncIso);
+  if (Number.isNaN(parsed.getTime())) return syncIso;
+  return parsed.toLocaleString("de-CH", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
   });
 }

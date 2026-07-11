@@ -6,6 +6,8 @@ export type StationState = "locked" | "available" | "active" | "completed" | "re
 
 export type CapabilityStatus = "unknown" | "supported" | "unsupported";
 
+export type ContentSource = "unknown" | "remote" | "cache" | "fallback";
+
 export interface GamePackage {
   schemaVersion: number;
   contentVersion: string;
@@ -99,6 +101,9 @@ export interface RuntimeStatus {
   serviceWorker: "unsupported" | "installing" | "ready";
   storage: "unknown" | "ready" | "failed";
   packageCached: boolean;
+  contentSource: ContentSource;
+  lastRemoteSyncIso?: string;
+  remoteConfigured: boolean;
   camera: CapabilityStatus;
   location: CapabilityStatus;
   qrScanner: CapabilityStatus;

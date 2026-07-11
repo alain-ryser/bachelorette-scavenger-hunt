@@ -32,9 +32,16 @@ function StatusPills({ progress, runtimeStatus }: Pick<AppShellProps, "progress"
         {runtimeStatus.serviceWorker === "ready" ? "installierbar" : "PWA lädt"}
       </span>
       <span className={runtimeStatus.packageCached ? "pill ok" : "pill warn"}>
-        {runtimeStatus.packageCached ? "CMS lokal" : "CMS offen"}
+        {runtimeStatus.packageCached ? contentSourceLabel(runtimeStatus.contentSource) : "CMS offen"}
       </span>
       {progress ? <span className="pill route">Route {progress.routeId}</span> : null}
     </div>
   );
+}
+
+function contentSourceLabel(source: RuntimeStatus["contentSource"]): string {
+  if (source === "remote") return "CMS remote";
+  if (source === "cache") return "CMS Cache";
+  if (source === "fallback") return "CMS Fallback";
+  return "CMS lokal";
 }

@@ -1,20 +1,24 @@
 /// <reference types="vite/client" />
 
-interface BarcodeDetectorOptions {
-  formats?: string[];
+interface ImportMetaEnv {
+  readonly VITE_REMOTE_CMS_URL?: string;
+  readonly VITE_REMOTE_CMS_KEY?: string;
 }
 
-interface DetectedBarcode {
-  rawValue: string;
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
+interface BarcodeDetectorResult {
+  rawValue?: string;
 }
 
 interface BarcodeDetector {
-  detect(image: CanvasImageSource): Promise<DetectedBarcode[]>;
+  detect(source: CanvasImageSource | HTMLVideoElement): Promise<BarcodeDetectorResult[]>;
 }
 
 interface BarcodeDetectorConstructor {
-  new (options?: BarcodeDetectorOptions): BarcodeDetector;
-  getSupportedFormats?: () => Promise<string[]>;
+  new (options?: { formats?: string[] }): BarcodeDetector;
 }
 
 interface Window {

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "contentVersion": "sheet-cms-2026-07-09",
   "event": {
-    "title": "Sina's Polteri",
+    "title": "Sina's Polteri juhui",
     "subtitle": "Sinas Weg zum Bonistock",
     "date": "2026-09-19",
     "timezone": "Europe/Zurich",
@@ -15,7 +15,7 @@
     {
       "id": "A",
       "name": "Regulär",
-      "description": "Mit Luzern, Aeschbach und optionalem See-/Sarnen-Moment.",
+      "description": "Für gutes Wetter und entspanntes Timing.",
       "stationIds": [
         "brunch",
         "luzern",
@@ -29,7 +29,7 @@
     {
       "id": "B",
       "name": "Kurz/Schlechtwetter",
-      "description": "Aeschbach als wetterfester Kern, ohne See-Stopp.",
+      "description": "Für Regen, Verspätung oder weniger Puffer.",
       "stationIds": [
         "brunch",
         "aeschbach",

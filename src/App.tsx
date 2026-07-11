@@ -2,17 +2,22 @@ import { useEffect, useState } from "react";
 import { AppShell } from "./components/AppShell";
 import { StartScreen } from "./components/StartScreen";
 import { StationScreen } from "./components/StationScreen";
-import { fetchGamePackage } from "./domain/content";
+import { fetchFallbackGamePackage, fetchGamePackageWithSource, isRemoteCmsConfigured } from "./domain/content";
 import { completeStation, createInitialProgress, recoverStation } from "./domain/gameEngine";
 import type { GamePackage, Progress, RouteId, RuntimeStatus } from "./domain/types";
 import { registerServiceWorker } from "./pwa/registerServiceWorker";
 import { clearLocalPhotos, clearProgress, readPackage, readProgress, savePackage, saveProgress, verifyStorage } from "./storage/db";
+
+const LAST_REMOTE_SYNC_KEY = "bachelorette-scavenger-hunt:last-remote-sync";
 
 const initialRuntimeStatus: RuntimeStatus = {
   online: navigator.onLine,
   serviceWorker: "unsupported",
   storage: "unknown",
   packageCached: false,
+  contentSource: "unknown",
+  lastRemoteSyncIso: readLastRemoteSyncIso(),
+  remoteConfigured: isRemoteCmsConfigured(),
   camera: "unknown",
   location: "unknown",
   qrScanner: "unknown"
@@ -63,7 +68,7 @@ export default function App() {
 
       if (cachedPackage) {
         setGamePackage(cachedPackage);
-        setRuntimeStatus((status) => ({ ...status, packageCached: true }));
+        setRuntimeStatus((status) => ({ ...status, packageCached: true, contentSource: "cache" }));
       }
       if (cachedProgress) {
         setProgress(cachedProgress);
@@ -80,20 +85,39 @@ export default function App() {
 
   async function refreshPackage() {
     try {
-      const nextPackage = await fetchGamePackage();
+      const { gamePackage: nextPackage, source } = await fetchGamePackageWithSource();
+      const lastRemoteSyncIso = source === "remote" ? new Date().toISOString() : runtimeStatus.lastRemoteSyncIso;
+      if (lastRemoteSyncIso && source === "remote") {
+        saveLastRemoteSyncIso(lastRemoteSyncIso);
+      }
+
       setGamePackage(nextPackage);
       await savePackage(nextPackage);
-      setRuntimeStatus((status) => ({ ...status, packageCached: true }));
+      setRuntimeStatus((status) => ({
+        ...status,
+        packageCached: true,
+        contentSource: source,
+        lastRemoteSyncIso: source === "remote" ? lastRemoteSyncIso : status.lastRemoteSyncIso
+      }));
       setError(null);
     } catch (refreshError) {
       const cachedPackage = await readPackage();
       if (cachedPackage) {
         setGamePackage(cachedPackage);
-        setRuntimeStatus((status) => ({ ...status, packageCached: true }));
+        setRuntimeStatus((status) => ({ ...status, packageCached: true, contentSource: "cache" }));
         setError("Live-CMS nicht erreichbar. Lokaler Snapshot wird verwendet.");
         return;
       }
-      setError(refreshError instanceof Error ? refreshError.message : "Inhaltspaket fehlt.");
+
+      try {
+        const fallbackPackage = await fetchFallbackGamePackage();
+        setGamePackage(fallbackPackage);
+        await savePackage(fallbackPackage);
+        setRuntimeStatus((status) => ({ ...status, packageCached: true, contentSource: "fallback" }));
+        setError("Remote-CMS nicht erreichbar. App-Fallback wurde geladen.");
+      } catch {
+        setError(refreshError instanceof Error ? refreshError.message : "Inhaltspaket fehlt.");
+      }
     }
   }
 
@@ -180,4 +204,20 @@ export default function App() {
       )}
     </AppShell>
   );
+}
+
+function readLastRemoteSyncIso(): string | undefined {
+  try {
+    return localStorage.getItem(LAST_REMOTE_SYNC_KEY) ?? undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function saveLastRemoteSyncIso(value: string): void {
+  try {
+    localStorage.setItem(LAST_REMOTE_SYNC_KEY, value);
+  } catch {
+    // Lokaler Sync-Status ist Komfortinformation; die App bleibt ohne ihn funktionsfähig.
+  }
 }

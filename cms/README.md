@@ -7,7 +7,7 @@ Der Prototyp baut daraus lokal denselben JSON-Snapshot, den später Google Apps 
 ## Dateien
 
 - `einstellungen.csv`: Eventdaten und redaktionelle Einstellungen.
-- `routen.csv`: Route A/B, Reihenfolge und aktivierte Stationen.
+- `routen.csv`: Route A/B, spoilerarme Route-Beschreibung, Reihenfolge und aktivierte Stationen.
 - `stationen.csv`: Stationstexte, Typen, Deadlines und Fallback-Codes.
 - `hinweise.csv`: Hinweise, akzeptierte Antworten und QR-Token.
 - `medien.csv`: geplante Medien, Drive-Links und Offline-Priorität.
@@ -35,3 +35,5 @@ pnpm run check
 Der Builder übernimmt technische Defaults wie bestehende Kartenlinks, GPS-Koordinaten und Choice-Optionen aus `public/content/game-package.json`, solange sie nicht im lokalen CMS gepflegt werden.
 
 Später ersetzt Google-Sheet-/Apps-Script-Publishing diese lokalen CSV-Dateien.
+
+Das Google Sheet muss dieselben Spaltennamen verwenden. Insbesondere `Routen` enthält die Spalte `route_description`, die als Untertitel der Route angezeigt wird.

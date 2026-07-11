@@ -1,9 +1,49 @@
 import type { GamePackage } from "./types";
 
-const CONTENT_URL = `${import.meta.env.BASE_URL}content/game-package.json`;
+const LOCAL_CONTENT_URL = `${import.meta.env.BASE_URL}content/game-package.json`;
+const REMOTE_CMS_URL = import.meta.env.VITE_REMOTE_CMS_URL?.trim();
+const REMOTE_CMS_KEY = import.meta.env.VITE_REMOTE_CMS_KEY?.trim();
+
+export type PackageFetchSource = "remote" | "fallback";
+
+export interface PackageFetchResult {
+  gamePackage: GamePackage;
+  source: PackageFetchSource;
+  remoteConfigured: boolean;
+}
+
+export function isRemoteCmsConfigured(): boolean {
+  return Boolean(REMOTE_CMS_URL);
+}
 
 export async function fetchGamePackage(): Promise<GamePackage> {
-  const response = await fetch(CONTENT_URL, { cache: "no-store" });
+  return (await fetchGamePackageWithSource()).gamePackage;
+}
+
+export async function fetchGamePackageWithSource(): Promise<PackageFetchResult> {
+  if (REMOTE_CMS_URL) {
+    const remotePackage = await fetchJsonPackage(buildRemoteUrl());
+    return {
+      gamePackage: remotePackage,
+      source: "remote",
+      remoteConfigured: true
+    };
+  }
+
+  const fallbackPackage = await fetchJsonPackage(LOCAL_CONTENT_URL);
+  return {
+    gamePackage: fallbackPackage,
+    source: "fallback",
+    remoteConfigured: false
+  };
+}
+
+export async function fetchFallbackGamePackage(): Promise<GamePackage> {
+  return fetchJsonPackage(LOCAL_CONTENT_URL);
+}
+
+async function fetchJsonPackage(url: string): Promise<GamePackage> {
+  const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) {
     throw new Error(`Inhaltspaket konnte nicht geladen werden (${response.status}).`);
   }
@@ -11,6 +51,18 @@ export async function fetchGamePackage(): Promise<GamePackage> {
   const data = (await response.json()) as GamePackage;
   validateGamePackage(data);
   return data;
+}
+
+function buildRemoteUrl(): string {
+  if (!REMOTE_CMS_URL) {
+    throw new Error("Remote-CMS ist nicht konfiguriert.");
+  }
+
+  const url = new URL(REMOTE_CMS_URL);
+  if (REMOTE_CMS_KEY) {
+    url.searchParams.set("key", REMOTE_CMS_KEY);
+  }
+  return url.toString();
 }
 
 export function validateGamePackage(gamePackage: GamePackage): void {

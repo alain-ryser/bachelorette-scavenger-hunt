@@ -46,6 +46,7 @@ const settings = rowsToKeyValue(await readCsv("einstellungen.csv"));
 const routeRows = rowsToObjects(await readCsv("routen.csv"), [
   "route_id",
   "route_name",
+  "route_description",
   "reihenfolge",
   "station_id",
   "aktiviert",
@@ -151,7 +152,6 @@ function buildEvent(defaultEvent) {
 }
 
 function buildRoutes(stationIds) {
-  const routeDescriptionById = new Map(basePackage.routes.map((route) => [route.id, route.description]));
   const rowsByRoute = groupBy(routeRows, "route_id");
 
   return Array.from(rowsByRoute.entries()).map(([routeId, rows]) => {
@@ -177,7 +177,7 @@ function buildRoutes(stationIds) {
     return {
       id: routeId,
       name: requiredValue(activeRows[0], "route_name"),
-      description: routeDescriptionById.get(routeId) ?? requiredValue(activeRows[0], "kommentar"),
+      description: optionalValue(activeRows[0].route_description) || requiredValue(activeRows[0], "kommentar"),
       stationIds: stationIdsForRoute
     };
   });
