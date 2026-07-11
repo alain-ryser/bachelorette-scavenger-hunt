@@ -291,7 +291,7 @@ function buildStation(row, hintsByStation) {
     throw new Error(`Station ${stationId}: unlock_type '${unlockType}' ist unbekannt.`);
   }
 
-  const type = stationId === "brunch" && unlockType === "STORY" ? "camera" : mappedType;
+  const type = mappedType;
   const defaults = TECHNICAL_DEFAULTS.stations[stationId] || {};
   const hints = hintsByStation[stationId] || [];
   const station = compact({

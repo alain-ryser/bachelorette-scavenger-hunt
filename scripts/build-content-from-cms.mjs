@@ -199,7 +199,7 @@ function buildStation(row, defaultsByStation, hintsByStation) {
     throw new Error(`Station ${stationId}: unlock_type '${unlockType}' ist unbekannt.`);
   }
 
-  const type = stationId === "brunch" && unlockType === "STORY" ? "camera" : baseType;
+  const type = baseType;
   const stationHints = buildHints(hintsByStation.get(stationId) ?? []);
   const answer = buildAnswer(hintsByStation.get(stationId) ?? [], defaults);
   const qrToken = buildQrToken(hintsByStation.get(stationId) ?? [], defaults);
