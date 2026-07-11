@@ -40,6 +40,8 @@ jobs:
         run: pnpm run build
         env:
           GITHUB_PAGES: "true"
+          VITE_REMOTE_CMS_URL: ${{ secrets.VITE_REMOTE_CMS_URL }}
+          VITE_REMOTE_CMS_KEY: ${{ secrets.VITE_REMOTE_CMS_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
