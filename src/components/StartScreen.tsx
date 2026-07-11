@@ -28,21 +28,10 @@ export function StartScreen({
       <section className="hero-card">
         <p className="eyebrow">{formatEventDate(gamePackage.event.date)}</p>
         <h2>{gamePackage.event.title}</h2>
-        <p>
-          Ein zentraler Gruppenmodus für Sina: kurze digitale Impulse, klare Reisephasen und genug Raum für
-          Brunch, Schoggi-Führung, Gespräche und Bonistock.
-        </p>
+        <p>{gamePackage.event.introText}</p>
       </section>
 
       <section className="panel">
-        <div className="section-title">
-          <span>1</span>
-          <div>
-            <h3>Spiel entsperren</h3>
-            <p>Ein Code reicht für Start und Prototyp-Test. Später kommt hier der geheime QR-Link dazu.</p>
-          </div>
-        </div>
-
         <label className="field">
           Spielcode
           <input

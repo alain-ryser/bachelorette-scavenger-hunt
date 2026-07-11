@@ -4,6 +4,8 @@
   "event": {
     "title": "Sina's Polteri juhui",
     "subtitle": "Sinas Weg zum Bonistock",
+    "appLabel": "Mission Gipfelglück",
+    "introText": "Ein zentraler Gruppenmodus für Sina: kurze digitale Impulse, klare Reisephasen und genug Raum für Brunch, Schoggi-Führung, Gespräche und Bonistock.",
     "date": "2026-09-19",
     "timezone": "Europe/Zurich",
     "startLocation": "Luzern"

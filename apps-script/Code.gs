@@ -45,6 +45,9 @@ const TECHNICAL_DEFAULTS = {
     gameCode: "SINA-2026"
   },
   event: {
+    appLabel: "Mission Gipfelglück",
+    introText:
+      "Ein zentraler Gruppenmodus für Sina: kurze digitale Impulse, klare Reisephasen und genug Raum für Brunch, Schoggi-Führung, Gespräche und Bonistock.",
     startLocation: "Luzern"
   },
   stations: {
@@ -233,6 +236,8 @@ function buildGamePackage() {
     event: {
       title: setting(settings, "spiel_titel", "Sina's Polteri"),
       subtitle: setting(settings, "untertitel", "Sinas Weg zum Bonistock"),
+      appLabel: setting(settings, "app_label", TECHNICAL_DEFAULTS.event.appLabel),
+      introText: setting(settings, "start_intro_text", TECHNICAL_DEFAULTS.event.introText),
       date: setting(settings, "event_datum", "2026-09-19"),
       timezone: setting(settings, "zeitzone", "Europe/Zurich"),
       startLocation: TECHNICAL_DEFAULTS.event.startLocation
@@ -378,6 +383,8 @@ function buildMediaItem(row, stationIds) {
 function validateGamePackage(gamePackage) {
   if (gamePackage.schemaVersion !== 1) throw new Error("schemaVersion muss 1 sein.");
   if (!gamePackage.event.title) throw new Error("event.title fehlt.");
+  if (!gamePackage.event.appLabel) throw new Error("event.appLabel fehlt.");
+  if (!gamePackage.event.introText) throw new Error("event.introText fehlt.");
   if (!gamePackage.access.gameCode) throw new Error("access.gameCode fehlt.");
 
   const stationIds = new Set(gamePackage.stations.map((station) => station.id));

@@ -12,7 +12,7 @@ export function AppShell({ gamePackage, progress, runtimeStatus, children }: App
     <div className="app-shell">
       <header className="topbar">
         <div>
-          <p className="eyebrow">Mission Gipfelglück</p>
+          <p className="eyebrow">{gamePackage.event.appLabel}</p>
           <h1>{gamePackage.event.subtitle}</h1>
         </div>
         <StatusPills progress={progress} runtimeStatus={runtimeStatus} />

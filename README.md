@@ -57,6 +57,13 @@ Lokale CMS-Änderungen testen:
 2. `pnpm run cms:build`
 3. Browser hart neu laden oder in der App `Inhaltsversion neu prüfen` klicken.
 
+Startseiten- und Headertexte aus `Einstellungen`:
+
+- `spiel_titel`: grosser Titel auf der Startseite.
+- `untertitel`: Text rechts neben dem Header-Label.
+- `app_label`: kleiner Text links oben in der App.
+- `start_intro_text`: Introtext unter dem Startseitentitel.
+
 Remote-CMS lokal testen:
 
 1. `.env.example` nach `.env.local` kopieren.

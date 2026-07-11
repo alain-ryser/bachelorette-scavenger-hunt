@@ -39,6 +39,10 @@ const offlinePriorityMap = new Map([
   ["LOW", "low"]
 ]);
 
+const defaultAppLabel = "Mission Gipfelglück";
+const defaultStartIntroText =
+  "Ein zentraler Gruppenmodus für Sina: kurze digitale Impulse, klare Reisephasen und genug Raum für Brunch, Schoggi-Führung, Gespräche und Bonistock.";
+
 const args = parseArgs(process.argv.slice(2));
 const basePackage = JSON.parse(await readFile(resolve(args.basePath ?? fallbackBasePath), "utf8"));
 
@@ -145,6 +149,8 @@ function buildEvent(defaultEvent) {
   return {
     title: setting("spiel_titel", defaultEvent.title),
     subtitle: setting("untertitel", defaultEvent.subtitle),
+    appLabel: setting("app_label", defaultEvent.appLabel ?? defaultAppLabel),
+    introText: setting("start_intro_text", defaultEvent.introText ?? defaultStartIntroText),
     date: setting("event_datum", defaultEvent.date),
     timezone: setting("zeitzone", defaultEvent.timezone),
     startLocation: defaultEvent.startLocation

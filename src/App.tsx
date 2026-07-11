@@ -171,7 +171,7 @@ export default function App() {
   if (!gamePackage) {
     return (
       <div className="loading-screen">
-        <p className="eyebrow">Mission Gipfelglück</p>
+        <p className="eyebrow">Schnitzeljagd</p>
         <h1>Inhaltspaket wird geladen…</h1>
         {error ? <p className="error-text">{error}</p> : null}
       </div>

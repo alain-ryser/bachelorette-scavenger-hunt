@@ -14,6 +14,8 @@ export interface GamePackage {
   event: {
     title: string;
     subtitle: string;
+    appLabel: string;
+    introText: string;
     date: string;
     timezone: string;
     startLocation: string;

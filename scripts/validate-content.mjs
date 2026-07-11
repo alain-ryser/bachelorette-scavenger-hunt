@@ -141,7 +141,7 @@ function validateEvent(event) {
     return;
   }
 
-  for (const field of ["title", "subtitle", "date", "timezone", "startLocation"]) {
+  for (const field of ["title", "subtitle", "appLabel", "introText", "date", "timezone", "startLocation"]) {
     if (!nonEmptyString(event[field])) {
       error(`event.${field} muss gesetzt sein.`);
     }

@@ -1,6 +1,8 @@
 Schlüssel,Wert,Erklärung,Status
 spiel_titel,Sina's Polteri juhui,Titel in der App,Freigegeben
 untertitel,Sinas Weg zum Bonistock,Untertitel auf dem Startbildschirm,Freigegeben
+app_label,Mission Gipfelglück,Text links oben in der App,Freigegeben
+start_intro_text,"Ein zentraler Gruppenmodus für Sina: kurze digitale Impulse, klare Reisephasen und genug Raum für Brunch, Schoggi-Führung, Gespräche und Bonistock.",Introtext auf der Startseite,Freigegeben
 event_datum,2026-09-19,Anlassdatum,Freigegeben
 zeitzone,Europe/Zurich,Für Deadlines und Versionen,Freigegeben
 aktive_route,A,"A = regulär, B = kurz/schlecht",Zu prüfen

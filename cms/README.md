@@ -6,7 +6,7 @@ Der Prototyp baut daraus lokal denselben JSON-Snapshot, den später Google Apps 
 
 ## Dateien
 
-- `einstellungen.csv`: Eventdaten und redaktionelle Einstellungen.
+- `einstellungen.csv`: Eventdaten, Startseiten-Texte und redaktionelle Einstellungen.
 - `routen.csv`: Route A/B, spoilerarme Route-Beschreibung, Reihenfolge und aktivierte Stationen.
 - `stationen.csv`: Stationstexte, Typen, Deadlines und Fallback-Codes.
 - `hinweise.csv`: Hinweise, akzeptierte Antworten und QR-Token.
